@@ -1,0 +1,98 @@
+﻿Group30_free, Homework1, Vitali Dolgoshei, @vitald75
+
+1) Посмотреть где я – 
+pwd
+
+2) Создать папку – 
+mkdir folder1
+
+3) Зайти в папку – 
+cd folder1
+
+4) Создать 3 папки – 
+mkdir subfolder1 subfolder2 subfolder3
+
+5) Зайти в любую папку – 
+cd subfolder1
+
+6) Создать 5 файлов (3 txt, 2 json) – 
+touch text1.txt text2.txt text3.txt data1.json data2.json 
+
+7) Создать 3 папки – 
+mkdir fldr1 fldr2 fldr3
+
+8) Вывести список содержимого папки – 
+ls -la
+
+9) + Открыть любой txt файл – 
+cat >> text1.txt
+
+10) + написать туда что-нибудь, любой текст. – 
+Line1 
+Line2
+Line3
+Line4 Santa
+Line5
+Line6
+Line7 Santa
+
+
+11) + сохранить и выйти. – 
+CTRL + C
+
+12) Выйти из папки на уровень выше –  
+cd ..
+
+13) переместить любые 2 файла, которые вы создали, в любую другую папку. – 
+mv subfolder1/text2.txt subfolder3/text2.txt
+mv subfolder1/data1.json subfolder3/data1.json
+
+14) скопировать любые 2 файла, которые вы создали, в любую другую папку. – 
+cp subfolder3/text2.txt subfolder4/text2.txt
+cp subfolder3/data1.json subfolder4/data1.json
+
+15) Найти файл по имени – 
+find -name text3.txt              // ищет в текущем и всех вложенных каталогах
+find subfolder1/*.json            // ищет по указанному пути 
+find -name text*.txt              // ищет в текущем каталоге  
+  
+
+16) просмотреть содержимое в реальном времени (команда grep) изучите как она работает. – 
+
+grep -r Santa                     // выдает список файлов, в которые входит строка поиска Santa, в текущем и всех вложенных каталогах 
+tail -f file.txt | grep Santa     // в реальном времени показывает добавляющиеся строки в файл file.txt содержащие Santa
+
+17) вывести несколько первых строк из текстового файла – 
+head -2 text1.txt
+
+18) вывести несколько последних строк из текстового файла – 
+tail -n 3 text1.txt
+
+19) просмотреть содержимое длинного файла (команда less) изучите как она работает. –
+less text1.txt 
+
+20) вывести дату и время – 
+date
+=========
+
+Задание *
+1) Отправить http запрос на сервер.
+http://162.55.220.72:5005/terminal-hw-request
+
+curl http://162.55.220.72:5005/terminal-hw-request
+curl http://162.55.220.72:5005/get_method?name=Vitali&age=44
+
+2) Написать скрипт который выполнит автоматически пункты 3, 4, 5, 6, 7, 8, 13
+
+#!/bin/bash
+echo Hello world. It is my first bash script.
+cd folder1
+mkdir subfolder1 subfolder2 subfolder3
+cd subfolder1
+touch text1.txt text2.txt text3.txt data1.json data2.json 
+mkdir fldr1 fldr2 fldr3
+ls -la
+mv text2.txt ../subfolder3/text2.txt
+mv data1.json ../subfolder3/data1.json
+
+
