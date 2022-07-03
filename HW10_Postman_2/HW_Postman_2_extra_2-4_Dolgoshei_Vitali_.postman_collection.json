@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "92f76295-d7b4-40cd-a9eb-6c7a35cfcc54",
+		"name": "HW_Postman_2_extra_2-4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18196426"
+	},
+	"item": [
+		{
+			"name": "EP_2* object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 2. http://162.55.220.72:5007/object_info_4\r",
+							"// * Преобразовать пункты 12-13-14 (salary из реквеста и респонса равны) таким образом, чтобы проверка производилась циклом, в котором будет всего ОДИН тест. Имя теста должно меняться в зависимости от значения в Salary\r",
+							"\r",
+							"let respData = pm.response.json();\r",
+							"let reqData = pm.request.url.query.toObject();\r",
+							"\r",
+							"respData.salary.forEach((salary,i) => { pm.test(`Is salary ${reqData.salary}*${i+1} from request = ${salary} from response`, pm.expect(+salary).to.eql(+reqData.salary*(i+1))) });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Vitali&age=46&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Vitali"
+						},
+						{
+							"key": "age",
+							"value": "46"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_3 ExtraObject_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 3. http://162.55.220.72:5005/object_info_3\r",
+							"//  Преобразовать задания 5-7 (сравнить идентичные поля в реквесте и респонсе) таким образом, чтобы это делалось ЗА ОДИН ТЕСТ (сразу все 3 поля) БЕЗ ЦИКЛОВ! (глубокое сравнение объектов)\r",
+							"\r",
+							"let respData = pm.response.json();\r",
+							"let reqData = pm.request.url.query.toObject();\r",
+							"\r",
+							"let respString = `{\"name\":\"${respData.name}\",\"age\":\"${respData.age}\",\"salary\":\"${respData.salary}\"}`;\r",
+							"let respObject = JSON.parse(respString);\r",
+							"\r",
+							"pm.test(\"Are the objects from request and response equal?\", function () {\r",
+							"    pm.expect(respObject).to.eql(reqData);\r",
+							"});\r",
+							"\r",
+							"// // 5. Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"// // 6. Проверить, что age в ответе равно age s request (age забрать из request.)\r",
+							"// // 7. Проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "vit",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Vitali&age=46&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Vitali"
+						},
+						{
+							"key": "age",
+							"value": "46"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_4 extra user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 4. http://162.55.220.72:5005/user_info_2\r",
+							"// 1)  Преобразовать задания 8 - 13 (проверить что в json имеется нужный параметр) таким образом, чтобы все проверки делались в цикле (1 проверка в цикле, в которую попадают нужные параметры). Название теста должно видоизменяться исходя из подаваемых данных. ( ${}  или другим способом)\r",
+							"\r",
+							"let respData = pm.response.json();\r",
+							"\r",
+							"let arrayToCheck = [\"start_qa_salary\", \"qa_salary_after_6_months\", \"qa_salary_after_12_months\", \"qa_salary_after_1.5_year\", \"qa_salary_after_3.5_years\", \"person\"]\r",
+							"\r",
+							"arrayToCheck.forEach((elem) => { \r",
+							"    pm.test(`${elem} exists in response`, function () {\r",
+							"   pm.expect(respData).to.have.property(elem);\r",
+							"})\r",
+							"})\r",
+							"\r",
+							"\r",
+							"// 8. Проверить, что json response имеет параметр start_qa_salary\r",
+							"// 9. Проверить, что json response имеет параметр qa_salary_after_6_months\r",
+							"// 10. Проверить, что json response имеет параметр qa_salary_after_12_months\r",
+							"// 11. Проверить, что json response имеет параметр qa_salary_after_1.5_year\r",
+							"// 12. Проверить, что json response имеет параметр qa_salary_after_3.5_years\r",
+							"// 13. Проверить, что json response имеет параметр person\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vitali",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_4_2 ** extra user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 4. http://162.55.220.72:5005/user_info_2\r",
+							"// 2) ** Преобразовать задания 14 - 18 (проверить что параметр равен salary умножить на коэффициент) таким образом, чтобы все проверки делались в цикле (1 проверка в цикле, в которую попадают нужные параметры). Название теста должно видоизменяться исходя из подаваемых данных. ( ${}  или другим способом)\r",
+							"\r",
+							"let respData = pm.response.json();\r",
+							"let reqData = request.data;\r",
+							"\r",
+							"let arrayNames = [\"start_qa_salary\", \"qa_salary_after_6_months\", \"qa_salary_after_12_months\", \"qa_salary_after_1.5_year\", \"qa_salary_after_3.5_years\", \"person\"]\r",
+							"let arrayCoeffs = [1, 2, 2.7, 3.3, 3.8]\r",
+							"\r",
+							"arrayCoeffs.forEach((elem,i) => { \r",
+							"    pm.test(`Does ${arrayNames[i]} response salary equal request salary*${elem}`, function () {\r",
+							"    pm.expect(+respData[arrayNames[i]]).to.eql(reqData.salary*elem);\r",
+							"})\r",
+							"})\r",
+							"\r",
+							"// 8. Проверить, что json response имеет параметр start_qa_salary\r",
+							"// 9. Проверить, что json response имеет параметр qa_salary_after_6_months\r",
+							"// 10. Проверить, что json response имеет параметр qa_salary_after_12_months\r",
+							"// 11. Проверить, что json response имеет параметр qa_salary_after_1.5_year\r",
+							"// 12. Проверить, что json response имеет параметр qa_salary_after_3.5_years\r",
+							"// 13. Проверить, что json response имеет параметр person\r",
+							"\r",
+							"// 14. Проверить, что параметр start_qa_salary равен salary из request (salary забрать из request.)\r",
+							"// 15. Проверить, что параметр qa_salary_after_6_months равен salary*2 из request (salary забрать из request.)\r",
+							"// 16. Проверить, что параметр qa_salary_after_12_months равен salary*2.7 из request (salary забрать из request.)\r",
+							"// 17. Проверить, что параметр qa_salary_after_1.5_year равен salary*3.3 из request (salary забрать из request.)\r",
+							"// 18. Проверить, что параметр qa_salary_after_3.5_years равен salary*3.8 из request (salary забрать из request.)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vitali",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_4_3 *** extra user_info_2 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 4. http://162.55.220.72:5005/user_info_2\r",
+							"// 3) *** Преобразовать описанные выше задания 1 и 2 для данного эндпоинта в ОДИН ЦИКЛ, в котором будут проходить ОБА теста.\r",
+							"\r",
+							"let respData = pm.response.json();\r",
+							"let reqData = request.data;\r",
+							"\r",
+							"let arrayNames = [\"start_qa_salary\", \"qa_salary_after_6_months\", \"qa_salary_after_12_months\", \"qa_salary_after_1.5_year\", \"qa_salary_after_3.5_years\", \"person\"]\r",
+							"let arrayCoeffs = [1, 2, 2.7, 3.3, 3.8]\r",
+							"\r",
+							"arrayNames.forEach((elem,i) => { \r",
+							"    pm.test(`${elem} exists in response`, function () {\r",
+							"     pm.expect(respData).to.have.property(elem);\r",
+							"    })\r",
+							"    if (!(arrayCoeffs[i] === undefined)) {\r",
+							"    pm.test(`Does ${arrayNames[i]} response equal request salary*${arrayCoeffs[i]}`, function () {\r",
+							"      pm.expect(+respData[elem]).to.eql(reqData.salary*arrayCoeffs[i])\r",
+							"})\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"\r",
+							"// 8. Проверить, что json response имеет параметр start_qa_salary\r",
+							"// 9. Проверить, что json response имеет параметр qa_salary_after_6_months\r",
+							"// 10. Проверить, что json response имеет параметр qa_salary_after_12_months\r",
+							"// 11. Проверить, что json response имеет параметр qa_salary_after_1.5_year\r",
+							"// 12. Проверить, что json response имеет параметр qa_salary_after_3.5_years\r",
+							"// 13. Проверить, что json response имеет параметр person\r",
+							"\r",
+							"// 14. Проверить, что параметр start_qa_salary равен salary из request (salary забрать из request.)\r",
+							"// 15. Проверить, что параметр qa_salary_after_6_months равен salary*2 из request (salary забрать из request.)\r",
+							"// 16. Проверить, что параметр qa_salary_after_12_months равен salary*2.7 из request (salary забрать из request.)\r",
+							"// 17. Проверить, что параметр qa_salary_after_1.5_year равен salary*3.3 из request (salary забрать из request.)\r",
+							"// 18. Проверить, что параметр qa_salary_after_3.5_years равен salary*3.8 из request (salary забрать из request.)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vitali",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

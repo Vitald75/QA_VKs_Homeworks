@@ -1,0 +1,2346 @@
+{
+	"info": {
+		"_postman_id": "f4833c03-db58-48b1-af64-4cf76d20a778",
+		"name": "HW_Postman_2_extra1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18196426"
+	},
+	"item": [
+		{
+			"name": "EP_1 user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Age negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Age negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "age30",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Age negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "18,5",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Age negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "17",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Age negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "121",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Salary negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Salary negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "sall20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Salary negative Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Salary negative Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000001",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Salary negative Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vital",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "10,5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Name negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Name negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vi",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Name negative Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vitalial10Vitalial10Vitalial10Vitalial10Vitalial10",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Name negative Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": " Vitali",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": " Vital",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Name negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Vitali ",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1 user_info_2 Name negative Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/user_info_2\r",
+							"// 1. (ОБЯЗАТЕЛЬНОЕ И ВАЖНЕЙШЕЕ ЗАДАНИЕ) http://162.55.220.72:5005/user_info_2\r",
+							"// Необходимо провести тестирование API данного эндпоинта на валидацию входных параметров. Суть задания: проверить валидации каждого поля, подаваемого в эндпоинт на возможные значения. Будем УСЛОВНО считать, что негативная проверка должна возвращать какой угодно статус НО НЕ 200! Ваша задача написать тест кейсы в постмане таким образом, что одна негативная проверка - один запрос, позитивные проверки можно объединять в 1. Ваша задача протестировать исходя из требований на все возможные аспекты. В каждом запросе тест ТОЛЬКО НА СТАТУС КОД (200 - позитивное значение, не 200 - негативное). \r",
+							"// P.S. ЗАДАНИЕ НЕ ПОДРАЗУМЕВАЕТ, ЧТО ЭНДПОИНТ РАБОТАЕТ СОГЛАСНО НАПИСАННЫМ ТРЕБОВАНИЯМ. МЫ УЧИМСЯ ПИСАТЬ ТЕСТЫ НА API!\r",
+							"// Требования:\r",
+							"// 1) Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное\r",
+							"// 2) Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное\r",
+							"// 3) Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное\r",
+							"\r",
+							"let reqData = request.data;\r",
+							"let name = reqData.name;\r",
+							"let name2 = reqData.name;\r",
+							"let age = reqData.age;\r",
+							"let salary = reqData.salary;\r",
+							"\r",
+							"// console.log(Number.isInteger(+salary));\r",
+							"console.log((name.length < 3 || name.length > 40));\r",
+							"\r",
+							"// positive cases\r",
+							"if ((typeof name === \"string\" && name !==\"\" && name.length == name.trim().length && name.length>=3 && name.length<=40) && (Number.isInteger(+age) && +age >=18 && +age <=120) && (Number.isInteger(+salary) && +salary >=1 && +salary <= 1000000) ) {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// negative cases\r",
+							"} else \r",
+							"{\r",
+							"    if (name == \"\") {\r",
+							"      pm.test(\"Status code is not 200, name is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"     if (name.length !== name.trim().length) {\r",
+							"      pm.test(\"Status code is not 200, name has postfix or prefix spaces\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"     else {\r",
+							"         console.log(name, name.length);\r",
+							"      if ((name.length < 3 || name.length > 40)) {\r",
+							"      pm.test(\"Status code is not 200, name length is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}   \r",
+							"     } \r",
+							"    }   \r",
+							"    \r",
+							"    if (!Number.isInteger(+age)) {\r",
+							"      pm.test(\"Status code is not 200, age is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"    else {\r",
+							"      if (age == \"\") {\r",
+							"      pm.test(\"Status code is not 200, age is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"      else {\r",
+							"       if (!(+age>=18 && +age<=120)) {\r",
+							"      pm.test(\"Status code is not 200, age is out of range\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}    \r",
+							"      }\r",
+							"    }\r",
+							"\r",
+							"    if (!Number.isInteger(+salary)) {\r",
+							"      pm.test(\"Status code is not 200, salary is not an Integer\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    else {\r",
+							"     if (salary == \"\") {\r",
+							"      pm.test(\"Status code is not 200, salary is empty\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })} \r",
+							"\r",
+							"     else {\r",
+							"      if (!(+salary >=1 && +salary <= 1000000)) {\r",
+							"             pm.test(\"Status code is not 200, salary is out of range 1..1000000\", function () {\r",
+							"       pm.response.to.not.have.status(200);\r",
+							"      })}\r",
+							"    }\r",
+							"    }\r",
+							"\r",
+							"    // pm.test(\"Status code is not 200, undefined \", function () {\r",
+							"    //    pm.response.to.not.have.status(200);\r",
+							"    //   })\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "46",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "   Vitali   ",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
