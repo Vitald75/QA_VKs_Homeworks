@@ -84,7 +84,7 @@
 							"let respObject = JSON.parse(respString);\r",
 							"\r",
 							"pm.test(\"Are the objects from request and response equal?\", function () {\r",
-							"    pm.expect(respObject).to.eql(reqData);\r",
+							"    pm.expect(respObject).to.deep.eql(reqData);\r",
 							"});\r",
 							"\r",
 							"// // 5. Проверить, что name в ответе равно name s request (name забрать из request.)\r",
